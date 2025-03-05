@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import './globals.css'; // Import your global styles if needed
+import { metadata } from './metadata'; // Import metadata
+
 
 // Dynamic import with SSR disabled
 const AOS = dynamic(() => import("aos"), { ssr: false });
@@ -28,10 +30,6 @@ const outfit = Outfit({
   variable: '--font-outfit',
 });
 
-export const metadata = {
-  title: 'RemiFlow',
-  description: 'Send money to India with RemiFlow',
-};
 
 export default function RootLayout({ children }) {
   return (
