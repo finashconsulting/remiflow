@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";  // Import dynamic for disabling SSR
 import { useEffect } from "react";
 import "aos/dist/aos.css";
 import Aos from "aos";
+import './globals.css'; // Import your global styles if needed
 
 // Dynamic import with SSR disabled
 const AOS = dynamic(() => import("aos"), { ssr: false });
@@ -27,28 +28,27 @@ const outfit = Outfit({
   variable: '--font-outfit',
 });
 
-
+export const metadata = {
+  title: 'RemiFlow',
+  description: 'Send money to India with RemiFlow',
+};
 
 export default function RootLayout({ children }) {
-  useEffect(() => { 
-    Aos.init(); 
-  }, []);
-
   return (
     <html lang="en">
       <head>
+        {/* Favicon (using favicon.png) */}
+        <link rel="icon" href="/favicon.png" />
 
-      {/* <link rel="icon" href="/favicon.svg" type="image/svg+xml"/> */}
-      <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml"/>
+        {/* Apple Touch Icon (using the same favicon.png) */}
+        <link rel="apple-touch-icon" href="/favicon.png" />
 
-
-        <title>Remiflow</title>
+        {/* PWA Metadata (optional) */}
+        <meta name="theme-color" content="#2B95FA" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
-      <body
-        className={`${notoSans.variable} ${outfit.variable} ${poppins.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
