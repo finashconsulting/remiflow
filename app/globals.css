@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body{
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.bg-gradient{
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(43, 149, 250, 0.08) 47%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.send_money_btn{
+  background: linear-gradient(180deg, #67B5FF 0%, #268BEB 100%);
+
+}
+
+.custom-select {
+  background-image: url("data:image/svg+xml;utf8,<svg>...</svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+}
