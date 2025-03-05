@@ -12,29 +12,35 @@ const paymentOptions = ["E-Transfer", "Cash pickup (within GTA)"];
 
 const ExchangeBox = () => {
   const [inr, setInr] = useState("1000.00");
-  const [cad, setCad] = useState("60040.00");
+  const [cad, setCad] = useState("");
   const [paymentMethod, setPaymentMethod] = useState(paymentOptions[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [exchangeRate, setExchangeRate] = useState(60.04); // Default rate, will be updated
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    // Fetch exchange rate from the API
-    const fetchExchangeRate = async () => {
-      try {
-        const response = await fetch(
-          "https://v6.exchangerate-api.com/v6/bfe0096271658fb2e9b78681/latest/CAD"
-        );
-        const data = await response.json();
-        const fetchedRate = data.conversion_rates.INR;
-        const adjustedRate = fetchedRate + 0.05; // Add 0.05 INR
-        setExchangeRate(adjustedRate);
-      } catch (error) {
-        console.error("Failed to fetch exchange rate:", error);
-      }
-    };
+  // Fetch exchange rate from the API
+  const fetchExchangeRate = async () => {
+    try {
+      const response = await fetch(
+        "https://v6.exchangerate-api.com/v6/bfe0096271658fb2e9b78681/latest/CAD"
+      );
+      const data = await response.json();
+      const fetchedRate = data.conversion_rates.INR;
+      const adjustedRate = fetchedRate + 0.05; // Add 0.05 INR
+      setExchangeRate(adjustedRate);
 
-    fetchExchangeRate();
+      // Update "They get" value based on the new rate
+      setCad((parseFloat(inr) * adjustedRate).toFixed(2));
+    } catch (error) {
+      console.error("Failed to fetch exchange rate:", error);
+    }
+  };
+
+  // Fetch rate on component mount and every hour
+  useEffect(() => {
+    fetchExchangeRate(); // Initial fetch
+    const interval = setInterval(fetchExchangeRate, 3600000); // Fetch every hour
+    return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
 
   const handleInrChange = (e) => {
@@ -162,7 +168,7 @@ const ExchangeBox = () => {
             </p>
             <p className="flex justify-between font-semibold pt-3">
               <span>Exchange rate</span>
-              <span>{parseFloat(cad).toFixed(2)} INR</span>
+              <span>{exchangeRate.toFixed(2)} INR</span>
             </p>
           </div>
         </div>
