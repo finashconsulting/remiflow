@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
 
         {/* Web App Manifest & Apple Touch Icon */}
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
         {/* PWA Meta Tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
