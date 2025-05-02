@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Noto_Sans, Outfit, Poppins } from "next/font/google";
 import "./globals.css";
 import dynamic from "next/dynamic";
@@ -35,15 +35,19 @@ export default function RootLayout({ children }) {
         {/* Favicon */}
         <link rel="icon" href="/favicon.png" />
 
-        {/* Web App Manifest & Apple Touch Icon */}
-        <link rel="manifest" href="/manifest.json" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-        {/* PWA Meta Tags */}
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+
+        {/* iOS Meta Tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="Remiflow" />
-        <meta name="theme-color" content="#007AFF" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+        {/* Android/General Theme Color */}
+        <meta name="theme-color" content="#ffffff" />
       </head>
       <body>{children}</body>
     </html>
